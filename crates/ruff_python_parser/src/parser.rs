@@ -1244,4 +1244,11 @@ a = 1
                 .to_string()
         );
     }
+
+    #[test]
+    fn test_unicode_aliases() {
+        // https://github.com/RustPython/RustPython/issues/4566
+        let parse_ast = parse_suite(r#"x = "\N{BACKSPACE}another cool trick""#, "<test>").unwrap();
+        insta::assert_debug_snapshot!(parse_ast);
+    }
 }
