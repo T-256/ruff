@@ -75,7 +75,7 @@ impl Violation for SingleLineImplicitStringConcatenation {
 /// ```
 ///
 /// ## Options
-/// - `flake8-implicit-str-concat.allow-multiline`
+/// - `lint.flake8-implicit-str-concat.allow-multiline`
 ///
 /// [PEP 8]: https://peps.python.org/pep-0008/#maximum-line-length
 #[violation]

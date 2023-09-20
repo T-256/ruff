@@ -41,7 +41,7 @@ use crate::rules::flake8_builtins::helpers::shadows_builtin;
 /// ```
 ///
 /// ## Options
-/// - `flake8-builtins.builtins-ignorelist`
+/// - `lint.flake8-builtins.builtins-ignorelist`
 ///
 /// ## References
 /// - [_Why is it a bad idea to name a variable `id` in Python?_](https://stackoverflow.com/questions/77552/id-is-a-bad-variable-name-in-python)

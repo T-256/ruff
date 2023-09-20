@@ -50,7 +50,7 @@ use ruff_python_ast::statement_visitor::StatementVisitor;
 /// ```
 ///
 /// ## Options
-/// - `pylint.max-returns`
+/// - `lint.pylint.max-returns`
 #[violation]
 pub struct TooManyReturnStatements {
     returns: usize,

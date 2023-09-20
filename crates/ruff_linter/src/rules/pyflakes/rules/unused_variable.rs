@@ -41,7 +41,7 @@ use crate::registry::AsRule;
 /// ```
 ///
 /// ## Options
-/// - `dummy-variable-rgx`
+/// - `lint.dummy-variable-rgx`
 #[violation]
 pub struct UnusedVariable {
     pub name: String,

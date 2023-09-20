@@ -51,7 +51,7 @@ use crate::checkers::ast::Checker;
 /// ```
 ///
 /// ## Options
-/// - `flake8-bugbear.extend-immutable-calls`
+/// - `lint.flake8-bugbear.extend-immutable-calls`
 #[violation]
 pub struct FunctionCallInDefaultArgument {
     name: Option<String>,

@@ -44,7 +44,7 @@ use super::super::helpers::shadows_builtin;
 /// ```
 ///
 /// ## Options
-/// - `flake8-builtins.builtins-ignorelist`
+/// - `lint.flake8-builtins.builtins-ignorelist`
 ///
 /// ## References
 /// - [_Is it bad practice to use a built-in function name as an attribute or method identifier?_](https://stackoverflow.com/questions/9109333/is-it-bad-practice-to-use-a-built-in-function-name-as-an-attribute-or-method-ide)

@@ -388,6 +388,17 @@
       "maximum": 320.0,
       "minimum": 1.0
     },
+    "lint": {
+      "description": "Options for the Ruff linter",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/LintOptions"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
     "logger-objects": {
       "description": "A list of objects that should be treated equivalently to a `logging.Logger` object.\n\nThis is useful for ensuring proper diagnostics (e.g., to identify `logging` deprecations and other best-practices) for projects that re-export a `logging.Logger` object from a common module.\n\nFor example, if you have a module `logging_setup.py` with the following contents: ```python import logging\n\nlogger = logging.getLogger(__name__) ```\n\nAdding `\"logging_setup.logger\"` to `logger-objects` will ensure that `logging_setup.logger` is treated as a `logging.Logger` object when imported from other modules (e.g., `from logging_setup import logger`).",
       "type": [
@@ -1543,6 +1554,447 @@
       "type": "integer",
       "format": "uint16",
       "minimum": 1.0
+    },
+    "LintOptions": {
+      "type": "object",
+      "properties": {
+        "allowed-confusables": {
+          "description": "A list of allowed \"confusable\" Unicode characters to ignore when enforcing `RUF001`, `RUF002`, and `RUF003`.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 1
+          }
+        },
+        "dummy-variable-rgx": {
+          "description": "A regular expression used to identify \"dummy\" variables, or those which should be ignored when enforcing (e.g.) unused-variable rules. The default expression matches `_`, `__`, and `_var`, but not `_var_`.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "extend-fixable": {
+          "description": "A list of rule codes or prefixes to consider autofixable, in addition to those specified by `fixable`.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/RuleSelector"
+          }
+        },
+        "extend-per-file-ignores": {
+          "description": "A list of mappings from file pattern to rule codes or prefixes to exclude, in addition to any rules excluded by `per-file-ignores`.",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RuleSelector"
+            }
+          }
+        },
+        "extend-select": {
+          "description": "A list of rule codes or prefixes to enable, in addition to those specified by `select`.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/RuleSelector"
+          }
+        },
+        "external": {
+          "description": "A list of rule codes that are unsupported by Ruff, but should be preserved when (e.g.) validating `# noqa` directives. Useful for retaining `# noqa` directives that cover plugins not yet implemented by Ruff.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "fixable": {
+          "description": "A list of rule codes or prefixes to consider autofixable. By default, all rules are considered autofixable.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/RuleSelector"
+          }
+        },
+        "flake8-annotations": {
+          "description": "Options for the `flake8-annotations` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8AnnotationsOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-bandit": {
+          "description": "Options for the `flake8-bandit` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8BanditOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-bugbear": {
+          "description": "Options for the `flake8-bugbear` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8BugbearOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-builtins": {
+          "description": "Options for the `flake8-builtins` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8BuiltinsOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-comprehensions": {
+          "description": "Options for the `flake8-comprehensions` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8ComprehensionsOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-copyright": {
+          "description": "Options for the `flake8-copyright` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8CopyrightOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-errmsg": {
+          "description": "Options for the `flake8-errmsg` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8ErrMsgOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-gettext": {
+          "description": "Options for the `flake8-gettext` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8GetTextOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-implicit-str-concat": {
+          "description": "Options for the `flake8-implicit-str-concat` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8ImplicitStrConcatOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-import-conventions": {
+          "description": "Options for the `flake8-import-conventions` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8ImportConventionsOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-pytest-style": {
+          "description": "Options for the `flake8-pytest-style` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8PytestStyleOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-quotes": {
+          "description": "Options for the `flake8-quotes` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8QuotesOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-self": {
+          "description": "Options for the `flake8_self` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8SelfOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-tidy-imports": {
+          "description": "Options for the `flake8-tidy-imports` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8TidyImportsOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-type-checking": {
+          "description": "Options for the `flake8-type-checking` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8TypeCheckingOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "flake8-unused-arguments": {
+          "description": "Options for the `flake8-unused-arguments` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Flake8UnusedArgumentsOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "force-exclude": {
+          "description": "Whether to enforce `exclude` and `extend-exclude` patterns, even for paths that are passed to Ruff explicitly. Typically, Ruff will lint any paths passed in directly, even if they would typically be excluded. Setting `force-exclude = true` will cause Ruff to respect these exclusions unequivocally.\n\nThis is useful for [`pre-commit`](https://pre-commit.com/), which explicitly passes all changed files to the [`ruff-pre-commit`](https://github.com/astral-sh/ruff-pre-commit) plugin, regardless of whether they're marked as excluded by Ruff's own settings.",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "format": {
+          "description": "Options to configure the code formatting.\n\nPreviously: The style in which violation messages should be formatted: `\"text\"` (default), `\"grouped\"` (group messages by file), `\"json\"` (machine-readable), `\"junit\"` (machine-readable XML), `\"github\"` (GitHub Actions annotations), `\"gitlab\"` (GitLab CI code quality report), `\"pylint\"` (Pylint text format) or `\"azure\"` (Azure Pipeline logging commands).\n\nThis option has been **deprecated** in favor of `output-format` to avoid ambiguity with Ruff's upcoming formatter.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/FormatOrOutputFormat"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ignore": {
+          "description": "A list of rule codes or prefixes to ignore. Prefixes can specify exact rules (like `F841`), entire categories (like `F`), or anything in between.\n\nWhen breaking ties between enabled and disabled rules (via `select` and `ignore`, respectively), more specific prefixes override less specific prefixes.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/RuleSelector"
+          }
+        },
+        "ignore-init-module-imports": {
+          "description": "Avoid automatically removing unused imports in `__init__.py` files. Such imports will still be flagged, but with a dedicated message suggesting that the import is either added to the module's `__all__` symbol, or re-exported with a redundant alias (e.g., `import os as os`).",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "isort": {
+          "description": "Options for the `isort` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/IsortOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "logger-objects": {
+          "description": "A list of objects that should be treated equivalently to a `logging.Logger` object.\n\nThis is useful for ensuring proper diagnostics (e.g., to identify `logging` deprecations and other best-practices) for projects that re-export a `logging.Logger` object from a common module.\n\nFor example, if you have a module `logging_setup.py` with the following contents: ```python import logging\n\nlogger = logging.getLogger(__name__) ```\n\nAdding `\"logging_setup.logger\"` to `logger-objects` will ensure that `logging_setup.logger` is treated as a `logging.Logger` object when imported from other modules (e.g., `from logging_setup import logger`).",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "mccabe": {
+          "description": "Options for the `mccabe` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McCabeOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "output-format": {
+          "description": "The style in which violation messages should be formatted: `\"text\"` (default), `\"grouped\"` (group messages by file), `\"json\"` (machine-readable), `\"junit\"` (machine-readable XML), `\"github\"` (GitHub Actions annotations), `\"gitlab\"` (GitLab CI code quality report), `\"pylint\"` (Pylint text format) or `\"azure\"` (Azure Pipeline logging commands).",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SerializationFormat"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pep8-naming": {
+          "description": "Options for the `pep8-naming` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Pep8NamingOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "per-file-ignores": {
+          "description": "A list of mappings from file pattern to rule codes or prefixes to exclude, when considering any matching files.",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RuleSelector"
+            }
+          }
+        },
+        "pycodestyle": {
+          "description": "Options for the `pycodestyle` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/PycodestyleOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pydocstyle": {
+          "description": "Options for the `pydocstyle` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/PydocstyleOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pyflakes": {
+          "description": "Options for the `pyflakes` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/PyflakesOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pylint": {
+          "description": "Options for the `pylint` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/PylintOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pyupgrade": {
+          "description": "Options for the `pyupgrade` plugin.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/PyUpgradeOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "select": {
+          "description": "A list of rule codes or prefixes to enable. Prefixes can specify exact rules (like `F841`), entire categories (like `F`), or anything in between.\n\nWhen breaking ties between enabled and disabled rules (via `select` and `ignore`, respectively), more specific prefixes override less specific prefixes.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/RuleSelector"
+          }
+        },
+        "task-tags": {
+          "description": "A list of task tags to recognize (e.g., \"TODO\", \"FIXME\", \"XXX\").\n\nComments starting with these tags will be ignored by commented-out code detection (`ERA`), and skipped by line-length rules (`E501`) if `ignore-overlong-task-comments` is set to `true`.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "unfixable": {
+          "description": "A list of rule codes or prefixes to consider non-autofix-able.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/RuleSelector"
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "McCabeOptions": {
       "type": "object",

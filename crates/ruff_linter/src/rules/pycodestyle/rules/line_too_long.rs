@@ -39,8 +39,8 @@ use crate::settings::LinterSettings;
 ///
 /// ## Options
 /// - `line-length`
-/// - `task-tags`
-/// - `pycodestyle.ignore-overlong-task-comments`
+/// - `lint.task-tags`
+/// - `lint.pycodestyle.ignore-overlong-task-comments`
 ///
 /// [PEP 8]: https://peps.python.org/pep-0008/#maximum-line-length
 #[violation]

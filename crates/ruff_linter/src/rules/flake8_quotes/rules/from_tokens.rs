@@ -31,7 +31,7 @@ use super::super::settings::Quote;
 /// ```
 ///
 /// ## Options
-/// - `flake8-quotes.inline-quotes`
+/// - `lint.flake8-quotes.inline-quotes`
 #[violation]
 pub struct BadQuotesInlineString {
     quote: Quote,
@@ -80,7 +80,7 @@ impl AlwaysAutofixableViolation for BadQuotesInlineString {
 /// ```
 ///
 /// ## Options
-/// - `flake8-quotes.multiline-quotes`
+/// - `lint.flake8-quotes.multiline-quotes`
 #[violation]
 pub struct BadQuotesMultilineString {
     quote: Quote,
@@ -128,7 +128,7 @@ impl AlwaysAutofixableViolation for BadQuotesMultilineString {
 /// ```
 ///
 /// ## Options
-/// - `flake8-quotes.docstring-quotes`
+/// - `lint.flake8-quotes.docstring-quotes`
 #[violation]
 pub struct BadQuotesDocstring {
     quote: Quote,
