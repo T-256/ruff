@@ -3,7 +3,7 @@
   dependencyDashboard: true,
   suppressNotifications: ["prEditedNotification"],
   extends: ["config:recommended"],
-  labels: ["internal"],
+  labels: ["dependencies"],
   schedule: ["before 4am on Monday"],
   semanticCommits: "disabled",
   separateMajorMinor: false,
