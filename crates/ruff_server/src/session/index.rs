@@ -302,7 +302,7 @@ impl Index {
         };
 
         // TODO: I think this does not correctly reload settings when using `extend` and the extended
-        //  setting isn't in a parent folder.
+        // setting isn't in a parent folder.
         for (root, settings) in self.settings.range_mut(enclosing_folder.to_path_buf()..) {
             if !root.starts_with(enclosing_folder) {
                 break;
@@ -337,11 +337,11 @@ impl Index {
         let Some(controller) = self.documents.remove(&url) else {
             anyhow::bail!("tried to close document that didn't exist at {}", url)
         };
-        if let Some(notebook) = controller.as_notebook() {
-            for url in notebook.urls() {
-                self.notebook_cells.remove(url).ok_or_else(|| {
-                    anyhow!("tried to de-register notebook cell with URL {url} that didn't exist")
-                })?;
+            if let Some(notebook) = controller.as_notebook() {
+                for url in notebook.urls() {
+                    self.notebook_cells.remove(url).ok_or_else(|| {
+                        anyhow!("tried to de-register notebook cell with URL {url} that didn't exist")
+                    })?;
             }
         }
         Ok(())
@@ -379,8 +379,8 @@ impl Index {
 
     fn url_for_key<'a>(&'a self, key: &'a DocumentKey) -> Option<&'a Url> {
         match key {
-            DocumentKey::Notebook(path) | DocumentKey::Text(path) => Some(path),
-            DocumentKey::NotebookCell(uri) => self.notebook_cells.get(uri),
+            DocumentKey::Notebook(url) | DocumentKey::Text(url) => Some(url),
+            DocumentKey::NotebookCell(url) => self.notebook_cells.get(url),
         }
     }
 
@@ -389,12 +389,13 @@ impl Index {
             self.settings_for_path(&path)
         } else {
             // If there's only a single workspace, use that configuration for an untitled document.
-            if self.settings.len() == 1 {
-                tracing::debug!(
-                    "Falling back to configuration of the only active workspace for the new document '{url}'."
-                );
+            let settings_count = self.settings.len();
+            if settings_count == 1 {
                 self.settings.values().next()
             } else {
+                tracing::debug!(
+                    "Unable to choose from {settings_count} available settings for document '{url}'."
+                );
                 None
             }
         }
