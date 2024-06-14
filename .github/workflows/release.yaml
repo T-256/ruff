@@ -141,13 +141,7 @@ jobs:
     name: Upload to PyPI
     runs-on: ubuntu-latest
     needs:
-      - macos-aarch64
-      - macos-x86_64
       - windows
-      - linux
-      - linux-cross
-      - musllinux
-      - musllinux-cross
       - validate-tag
     # If you don't set an input tag, it's a dry run (no uploads).
     if: ${{ inputs.tag }}
